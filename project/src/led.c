@@ -8,16 +8,16 @@ static char redVal[] = {0,LED_RED}, greenVal[] = {0, LED_GREEN};
 void led_init()
 {
   P1DIR |= LEDS;// bits attached to leds are output
-  leds_changed = 1;
+  led_changed = 1;
   led_update();
 }
 
 void led_update(){
-  if (leds_changed) {
+  if (led_changed) {
     char ledFlags = redVal[red_on] | greenVal[green_on];
 
     P1OUT &= (0xff - LEDS) | ledFlags; // clear bits for off leds
     P1OUT |= ledFlags;         // set bits for on leds
-    leds_changed = 0;
+    led_changed = 0;
   }
 }
