@@ -19,3 +19,17 @@ load: toy.elf
 
 clean:
 	rm -f *.o *.elf
+
+led.o: led.c led.h
+
+swithces.o: switches.h led.h
+
+buzzer.o: buzzer.h
+
+stateMachines.o: switches.h led.h buzzer.h stateMachines.h
+
+wdInterruptHandler.o: stateMachines.h
+
+p2_interrupt_handler.o: switches.h
+
+toyMain.o: switches.h led.h buzzer.h
