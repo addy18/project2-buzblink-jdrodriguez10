@@ -4,7 +4,7 @@ Project 2: Blinky-Buzzy Toy
 ## Description:
 
 Interrupt-driven toy program that flashes the LEDs and makes sounds depending
-on which of the 4 switch you press.
+on which of the 4 switches you press.
 
 ## Compile and Run:
 
