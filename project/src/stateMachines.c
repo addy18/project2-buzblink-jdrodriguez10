@@ -7,6 +7,7 @@
 static short freq = 500;
 static short state2_status = 1;
 
+
 char turn_green_on()
 {
   char changed = 0;
@@ -17,6 +18,7 @@ char turn_green_on()
   }
   return changed;
 }
+
 
 char turn_red_on()
 {
@@ -34,4 +36,26 @@ char turn_red_on()
     break;
   }
   return 1;
+}
+
+
+void buzzer_advance(){
+  if (state2_status) freq += 225;
+  else freq -= 450;
+  short cycles = 2000000/freq;
+  buzzer_set_period(cycles);
+}
+
+
+void state_up()
+{
+  state2_status = 1; red_on = 1; green_on = 0;
+  leds_changed = 1; led_update();
+}
+
+
+void state_down()
+{
+  state2_status = 0; red_on = 0; green_on = 1;
+  leds_changed= 1; led_update();
 }
