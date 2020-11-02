@@ -122,3 +122,25 @@ char state4(){
   led_update();
   return 1;
 }
+
+
+void state_advance()
+{
+  char changed = 0;
+  switch(super_state){
+  case 1:
+    changed = state1(); // turn on/off leds and buzzer.
+    break;
+  case 2:
+    changed = state2(); // siren
+    break;
+  case 3:
+    changed = state3(); // diming leds
+    break;
+  case 4:
+    changed = state4(); // turns leds and buzzer off.
+    break;
+  }
+  led_changed = changed;
+  led_update();
+}
