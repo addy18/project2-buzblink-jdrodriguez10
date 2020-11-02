@@ -50,12 +50,24 @@ void buzzer_advance(){
 void state_up()
 {
   state2_status = 1; red_on = 1; green_on = 0;
-  leds_changed = 1; led_update();
+  led_changed = 1; led_update();
 }
 
 
 void state_down()
 {
   state2_status = 0; red_on = 0; green_on = 1;
-  leds_changed= 1; led_update();
+  led_changed= 1; led_update();
+}
+
+
+void dim_leds(char x){
+  static short dimCount = 0;
+  switch(dimCount % x){
+  case 0: red_on = 1; green_on = 1; dimCount++; break;
+  case 1: red_on = 0; green_on = 0; dimCount++; break;
+  default: red_on = 0; green_on = 0; dimCount++; break;
+  }
+  led_changed = 1;
+  led_update();
 }
