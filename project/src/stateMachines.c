@@ -8,6 +8,7 @@ static short freq = 500;
 static short state2_status = 1;
 
 
+// turns on/off green led when red led is on
 char turn_green_on()
 {
   char changed = 0;
@@ -20,6 +21,7 @@ char turn_green_on()
 }
 
 
+// turns on/off red led
 char turn_red_on()
 {
   static char stateS1 = 1;
@@ -39,6 +41,7 @@ char turn_red_on()
 }
 
 
+// increases/decreases pitch
 void buzzer_advance(){
   if (state2_status) freq += 225;
   else freq -= 450;
@@ -61,6 +64,7 @@ void state_down()
 }
 
 
+//leds are on 1/x
 void dim_leds(char x){
   static short dimCount = 0;
   switch(dimCount % x){
@@ -73,6 +77,7 @@ void dim_leds(char x){
 }
 
 
+// turns on/off leds
 char state1()
 {
   char changed = 0;
@@ -86,6 +91,8 @@ char state1()
 }
 
 
+// pitch rises from 500-5000Hz with red led on
+// pitch decreases from 5000-500Hz with green led on
 char state2()
 {
   static short stateS2 = 0;
@@ -99,6 +106,7 @@ char state2()
 }
 
 
+// changes from 0% dim to 50% to 33% to 13% to 6% and buzzer pitch decreases with it
 char state3()
 {
   static short s3Counter = 0;
@@ -114,6 +122,7 @@ char state3()
 }
 
 
+// turns off leds and buzzer
 char state4(){
   buzzer_set_period(0);
   red_on = 0;
@@ -124,6 +133,7 @@ char state4(){
 }
 
 
+// changes states
 void state_advance()
 {
   char changed = 0;
