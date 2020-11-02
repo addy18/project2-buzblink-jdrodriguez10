@@ -71,3 +71,54 @@ void dim_leds(char x){
   led_changed = 1;
   led_update();
 }
+
+
+char state1()
+{
+  char changed = 0;
+  static enum {R=0, G=1} color = G;
+  switch (color) {
+  case R: changed = turn_red_on(); color = G; break;
+  case G: changed = turn_green_on(); color = R; break;
+  }
+  led_changed = changed;
+  led_update();
+}
+
+
+char state2()
+{
+  static short stateS2 = 0;
+  switch(stateS2){
+  case 0:
+  case 1: state_up(); stateS2++; break;
+  case 2: state_down(); stateS2 = 0;
+  default: break;
+  }
+  return 1;
+}
+
+
+char state3()
+{
+  static short s3Counter = 0;
+  static short stateS3 = 0;
+  if (++s3Counter == 125) { stateS3++; s3Counter = 0;}
+  switch (stateS3){
+  case 0: dim_leds(1); buzzer_set_period(0); break;
+  case 1: dim_leds(2); buzzer_set_period(500); break;
+  case 2: dim_leds(3); buzzer_set_period(1500); break;
+  case 3: dim_leds(4); buzzer_set_period(6000); break;
+  case 4: dim_leds(8); buzzer_set_period(0); stateS3 = 0; break;
+  }
+}
+
+
+char state4(){
+  buzzer_set_period(0);
+  red_on = 0;
+  green_on = 0;
+  led_changed = 1;
+  led_update();
+  return 1;
+}
